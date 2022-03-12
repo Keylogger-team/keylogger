@@ -15,7 +15,7 @@ namespace project_kan
             {
                 Thread.Sleep(100);
 
-                //почему-то определяет язык только тот, что был при запуске программы
+                //start language (wtf?) - I can't change while programm is working
                 //string Text = "";
                 //InputLanguage myCurrentLanguage = InputLanguage.CurrentInputLanguage;
                 //Text = myCurrentLanguage.Culture.EnglishName;
