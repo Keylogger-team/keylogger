@@ -1,0 +1,15 @@
+C:\Users\ccoo0\source\repos\project_kan\project_kan\bin\Release\net6.0-windows\project_kan.exe
+C:\Users\ccoo0\source\repos\project_kan\project_kan\bin\Release\net6.0-windows\project_kan.deps.json
+C:\Users\ccoo0\source\repos\project_kan\project_kan\bin\Release\net6.0-windows\project_kan.runtimeconfig.json
+C:\Users\ccoo0\source\repos\project_kan\project_kan\bin\Release\net6.0-windows\project_kan.dll
+C:\Users\ccoo0\source\repos\project_kan\project_kan\bin\Release\net6.0-windows\project_kan.pdb
+C:\Users\ccoo0\source\repos\project_kan\project_kan\obj\Release\net6.0-windows\project_kan.csproj.AssemblyReference.cache
+C:\Users\ccoo0\source\repos\project_kan\project_kan\obj\Release\net6.0-windows\project_kan.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ccoo0\source\repos\project_kan\project_kan\obj\Release\net6.0-windows\project_kan.AssemblyInfoInputs.cache
+C:\Users\ccoo0\source\repos\project_kan\project_kan\obj\Release\net6.0-windows\project_kan.AssemblyInfo.cs
+C:\Users\ccoo0\source\repos\project_kan\project_kan\obj\Release\net6.0-windows\project_kan.csproj.CoreCompileInputs.cache
+C:\Users\ccoo0\source\repos\project_kan\project_kan\obj\Release\net6.0-windows\project_kan.dll
+C:\Users\ccoo0\source\repos\project_kan\project_kan\obj\Release\net6.0-windows\refint\project_kan.dll
+C:\Users\ccoo0\source\repos\project_kan\project_kan\obj\Release\net6.0-windows\project_kan.pdb
+C:\Users\ccoo0\source\repos\project_kan\project_kan\obj\Release\net6.0-windows\project_kan.genruntimeconfig.cache
+C:\Users\ccoo0\source\repos\project_kan\project_kan\obj\Release\net6.0-windows\ref\project_kan.dll

